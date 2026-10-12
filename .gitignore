@@ -9,3 +9,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# LinkedIn assets (kept local, not published)
+SocialAssets/
