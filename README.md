@@ -3,7 +3,7 @@
 Single-page, bilingual (EN / FR) CV site for Ziad Ouariachi, Senior Equity Research Analyst (Casablanca).
 Plain HTML/CSS/JS — no build step, no framework. Hosted on GitHub Pages.
 
-**Live:** https://matsmiersen.github.io/ZiadCV/
+**Live:** https://ziad-ouariachi.github.io/
 
 ## Features
 - English ↔ French toggle and light ↔ dark toggle (both remembered in `localStorage`)
@@ -65,3 +65,8 @@ the canonical, social preview and sitemap tags. Upload `dist.zip` to Netlify Dro
 GitHub Pages serves the `main` branch root. Push to `main` and the site updates in about a minute.
 If the site moves to another URL, update the absolute URLs in `index.html` (`canonical`, `og:*`, `twitter:*`,
 JSON-LD) and `sitemap.xml`.
+
+## Ownership & handover
+The site lives in the GitHub organization **ziad-ouariachi** (repo `ziad-ouariachi.github.io`, served at the root URL).
+To hand over: invite Ziad's GitHub account as an organization **Owner**
+(Organization → People → Invite member → role *Owner*). Once he accepts, the previous owner can leave the organization.
