@@ -10,9 +10,6 @@
 <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://matsmiersen.github.io/ZiadCV/">
-<link rel="alternate" hreflang="en" href="https://matsmiersen.github.io/ZiadCV/?lang=en">
-<link rel="alternate" hreflang="fr" href="https://matsmiersen.github.io/ZiadCV/?lang=fr">
-<link rel="alternate" hreflang="x-default" href="https://matsmiersen.github.io/ZiadCV/">
 
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Ziad Ouariachi">
@@ -88,6 +85,8 @@
     --border: #e3ddd0;
     --border-strong: #cfc6b4;
     --accent: #85631f;          /* gold, AA on light bg */
+    --accent-ink: #6f5216;      /* gold for small text on tinted chips */
+    --danger: #b42318;
     --accent-bright: #b8913f;
     --accent-soft: rgba(184, 145, 63, .14);
     --navy: #0f1c33;
@@ -114,7 +113,7 @@
       --bg: #0b1220; --bg-alt: #0e1628; --surface: #111a2e; --surface-2: #152038;
       --text: #ece8df; --text-soft: #cfd5e0; --muted: #9aa5b8;
       --border: #1f2b45; --border-strong: #2c3b5c;
-      --accent: #dcbb76; --accent-bright: #e6c887; --accent-soft: rgba(220, 187, 118, .12);
+      --accent: #dcbb76; --accent-bright: #e6c887; --accent-soft: rgba(220, 187, 118, .12); --accent-ink: #e6c887; --danger: #ff8a7a;
       --navy: #e6c887; --on-navy: #0b1220;
       --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
       --shadow-md: 0 18px 40px -18px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.3);
@@ -127,7 +126,7 @@
     --bg: #0b1220; --bg-alt: #0e1628; --surface: #111a2e; --surface-2: #152038;
     --text: #ece8df; --text-soft: #cfd5e0; --muted: #9aa5b8;
     --border: #1f2b45; --border-strong: #2c3b5c;
-    --accent: #dcbb76; --accent-bright: #e6c887; --accent-soft: rgba(220, 187, 118, .12);
+    --accent: #dcbb76; --accent-bright: #e6c887; --accent-soft: rgba(220, 187, 118, .12); --accent-ink: #e6c887; --danger: #ff8a7a;
     --navy: #e6c887; --on-navy: #0b1220;
     --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
     --shadow-md: 0 18px 40px -18px rgba(0,0,0,.7), 0 2px 6px rgba(0,0,0,.3);
@@ -150,8 +149,10 @@
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
-  html.theme-anim body, html.theme-anim body * {
-    transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease) !important;
+  @media (prefers-reduced-motion: no-preference) {
+    html.theme-anim body, html.theme-anim body * {
+      transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease) !important;
+    }
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; }
@@ -378,7 +379,7 @@
     transition: border-color .2s var(--ease), color .2s var(--ease), background-color .2s var(--ease);
   }
   .chip:hover { border-color: var(--accent); color: var(--accent); }
-  .chip.gold { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .chip.gold { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); }
 
   /* About */
   .about-grid { display: grid; gap: 32px; }
@@ -513,11 +514,11 @@
   .field label { font-size: 13px; font-weight: 600; color: var(--text-soft); }
   .field input, .field textarea {
     width: 100%; font: 400 15px/1.5 var(--font-body); color: var(--text);
-    background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+    background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: 10px; padding: 12px 14px;
     transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
   }
   .field textarea { min-height: 140px; resize: vertical; }
-  .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .75; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 1; }
   .field input:hover, .field textarea:hover { border-color: var(--border-strong); }
   .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); background: var(--surface); }
   .form-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
@@ -604,7 +605,7 @@
 
 <header class="site-header" id="top-bar">
   <div class="container header-inner">
-    <a class="brand" href="#top" aria-label="Ziad Ouariachi — home">
+    <a class="brand" href="#top" aria-label="Ziad Ouariachi — home" data-i18n-attr="aria-label:a11y.home">
       <span class="brand-mark" aria-hidden="true">ZO</span>
       <span class="brand-name">Ziad Ouariachi</span>
     </a>
@@ -674,7 +675,7 @@
 
         <figure class="portrait reveal" style="margin:0">
           <div class="portrait-frame">
-            <img src="assets/ziad-ouariachi.jpg" width="1024" height="1024" alt="Portrait of Ziad Ouariachi" data-i18n-attr="alt:hero.photoAlt" fetchpriority="high">
+            <img src="assets/ziad-ouariachi.jpg" width="800" height="800" alt="Portrait of Ziad Ouariachi" data-i18n-attr="alt:hero.photoAlt" fetchpriority="high">
           </div>
         </figure>
       </div>
@@ -705,7 +706,7 @@
             <h3 data-i18n="about.strengths">Key strengths</h3>
             <ul class="chips">
               <li class="chip gold" data-i18n="str.1">Analytical rigour</li>
-              <li class="chip gold" data-i18n="str.2">Financial modeling &amp; valuation</li>
+              <li class="chip gold" data-i18n="str.2">Financial modelling &amp; valuation</li>
               <li class="chip" data-i18n="str.3">Research writing &amp; reporting</li>
               <li class="chip" data-i18n="str.4">Institutional client communication</li>
               <li class="chip" data-i18n="str.5">Presentation</li>
@@ -736,7 +737,7 @@
       <div class="section-head reveal">
         <span class="eyebrow"><span class="num">02</span>&nbsp;<span data-i18n="nav.experience">Experience</span></span>
         <h2 id="exp-title" data-i18n="exp.title">A track record built on research and transactions.</h2>
-        <p data-i18n="exp.sub">From buy-side-ready investment cases to live deal execution — most recent first.</p>
+        <p data-i18n="exp.sub">From institutional-grade investment cases to live deal execution — most recent first.</p>
       </div>
 
       <ol class="xp-list">
@@ -752,10 +753,10 @@
             <h3 class="tl-role" data-i18n="e1.role">Senior Equity Research Analyst</h3>
             <p class="tl-company">Valoris Securities</p>
             <ul class="tl-list">
-              <li data-i18n="e1.b1">Covered and analysed companies listed on the MASI index of the Casablanca Stock Exchange.</li>
-              <li data-i18n="e1.b2">Built and maintained financial models and in-depth valuations to drive investment recommendations.</li>
-              <li data-i18n="e1.b3">Published valuation notes, annual and quarterly results notes, sector and macroeconomic research on the Moroccan market.</li>
-              <li data-i18n="e1.b4">Presented research to institutional investors and brokers, and handled bespoke client requests.</li>
+              <li data-i18n="e1.b1">Cover and analyse companies listed on the MASI index of the Casablanca Stock Exchange.</li>
+              <li data-i18n="e1.b2">Build and maintain financial models and in-depth valuations to drive investment recommendations.</li>
+              <li data-i18n="e1.b3">Publish valuation notes, annual and quarterly results notes, sector and macroeconomic research on the Moroccan market.</li>
+              <li data-i18n="e1.b4">Present research to institutional investors and brokers, and handle bespoke client requests.</li>
             </ul>
             <ul class="chips" aria-label="Focus areas" data-i18n-attr="aria-label:a11y.focus">
               <li class="chip" data-i18n="e1.t1">Moroccan equities</li>
@@ -859,7 +860,7 @@
           </ul>
         </article>
         <article class="card skill-card reveal">
-          <div class="skill-card-head"><span class="skill-icon" aria-hidden="true"><svg><use href="#i-calc"/></svg></span><h3 data-i18n="sk.fm">Financial Modeling</h3></div>
+          <div class="skill-card-head"><span class="skill-icon" aria-hidden="true"><svg><use href="#i-calc"/></svg></span><h3 data-i18n="sk.fm">Financial Modelling</h3></div>
           <ul class="chips">
             <li class="chip" data-i18n="sk.fm1">Three-statement models</li>
             <li class="chip">DCF</li>
@@ -976,7 +977,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow"><span class="num">05</span>&nbsp;<span data-i18n="nav.highlights">Highlights</span></span>
-        <h2 id="hl-title" data-i18n="hl.title">Selected deals &amp; mandates</h2>
+        <h2 id="hl-title" data-i18n="hl.title">Selected deals &amp; research</h2>
         <p data-i18n="hl.sub">A snapshot of transactions and coverage work. Client names are withheld where confidential.</p>
       </div>
 
@@ -986,7 +987,7 @@
           <h3 data-i18n="d1.title">Company disposals — Moroccan mid-market</h3>
           <dl>
             <div class="row"><dt data-i18n="lbl.sector">Sector</dt><dd data-i18n="d1.sector">Multi-sector, Morocco</dd></div>
-            <div class="row"><dt data-i18n="lbl.stage">Stage</dt><dd data-i18n="d1.stage">Private companies · control sale</dd></div>
+            <div class="row"><dt data-i18n="lbl.stage">Scope</dt><dd data-i18n="d1.stage">Private companies · control sale</dd></div>
             <div class="row"><dt data-i18n="lbl.role">Role</dt><dd data-i18n="d1.role">Buyer sourcing, teasers, valuation, IM drafting</dd></div>
             <div class="row outcome"><dt data-i18n="lbl.outcome">Outcome</dt><dd data-i18n="d1.outcome">4 transactions executed as part of the deal team</dd></div>
           </dl>
@@ -996,9 +997,9 @@
           <div class="deal-top"><span class="deal-tag" data-i18n="d2.tag">Equity research · Europe</span><span class="deal-index" aria-hidden="true">02</span></div>
           <h3 data-i18n="d2.title">Initiations of coverage — European mid &amp; small caps</h3>
           <dl>
-            <div class="row"><dt data-i18n="lbl.sector">Sector</dt><dd data-i18n="d2.sector">Consumer, healthcare, business services, real estate</dd></div>
-            <div class="row"><dt data-i18n="lbl.stage">Stage</dt><dd data-i18n="d2.stage">Listed · mid &amp; small caps</dd></div>
-            <div class="row"><dt data-i18n="lbl.role">Role</dt><dd data-i18n="d2.role">Modeling, valuation, management meetings, report writing</dd></div>
+            <div class="row"><dt data-i18n="lbl.sector">Sector</dt><dd data-i18n="d2.sector">Consumer, healthcare, business services, leisure, real estate</dd></div>
+            <div class="row"><dt data-i18n="lbl.stage">Scope</dt><dd data-i18n="d2.stage">Listed · mid &amp; small caps</dd></div>
+            <div class="row"><dt data-i18n="lbl.role">Role</dt><dd data-i18n="d2.role">Modelling, valuation, management meetings, report writing</dd></div>
             <div class="row outcome"><dt data-i18n="lbl.outcome">Outcome</dt><dd data-i18n="d2.outcome">Investment recommendations distributed to Bernstein's institutional clients</dd></div>
           </dl>
         </article>
@@ -1008,7 +1009,7 @@
           <h3 data-i18n="d3.title">MASI coverage — Casablanca Stock Exchange</h3>
           <dl>
             <div class="row"><dt data-i18n="lbl.sector">Sector</dt><dd data-i18n="d3.sector">Moroccan listed companies</dd></div>
-            <div class="row"><dt data-i18n="lbl.stage">Stage</dt><dd data-i18n="d3.stage">Listed · large &amp; mid caps</dd></div>
+            <div class="row"><dt data-i18n="lbl.stage">Scope</dt><dd data-i18n="d3.stage">Listed · large &amp; mid caps</dd></div>
             <div class="row"><dt data-i18n="lbl.role">Role</dt><dd data-i18n="d3.role">Senior analyst — models, valuation &amp; results notes</dd></div>
             <div class="row outcome"><dt data-i18n="lbl.outcome">Outcome</dt><dd data-i18n="d3.outcome">Valuation, results and macro research for institutional investors</dd></div>
           </dl>
@@ -1019,7 +1020,7 @@
           <h3 data-i18n="d4.title">Sector &amp; ESG reports</h3>
           <dl>
             <div class="row"><dt data-i18n="lbl.sector">Sector</dt><dd data-i18n="d4.sector">European mid caps</dd></div>
-            <div class="row"><dt data-i18n="lbl.stage">Stage</dt><dd data-i18n="d4.stage">Cross-sector thematic</dd></div>
+            <div class="row"><dt data-i18n="lbl.stage">Scope</dt><dd data-i18n="d4.stage">Cross-sector thematic</dd></div>
             <div class="row"><dt data-i18n="lbl.role">Role</dt><dd data-i18n="d4.role">Research, analysis &amp; drafting</dd></div>
             <div class="row outcome"><dt data-i18n="lbl.outcome">Outcome</dt><dd data-i18n="d4.outcome">Sector and ESG insight used in investor engagement</dd></div>
           </dl>
@@ -1041,7 +1042,7 @@
         <ul class="contact-list reveal">
           <li><a class="card contact-item" href="mailto:ziad.ouariachi@rennes-sb.com">
             <span class="ic" aria-hidden="true"><svg><use href="#i-mail"/></svg></span>
-            <span><span class="k">Email</span><br><span class="v">ziad.ouariachi@rennes-sb.com</span></span>
+            <span><span class="k" data-i18n="ct.email">Email</span><br><span class="v">ziad.ouariachi@rennes-sb.com</span></span>
           </a></li>
           <li><a class="card contact-item" href="https://www.linkedin.com/in/ziad-ouariachi-2431b0195/" target="_blank" rel="noopener noreferrer">
             <span class="ic" aria-hidden="true"><svg><use href="#i-linkedin"/></svg></span>
@@ -1070,16 +1071,16 @@
           <div class="form-2">
             <div class="field">
               <label for="f-name" data-i18n="f.name">Name</label>
-              <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Jane Doe" data-i18n-attr="placeholder:f.nameP">
+              <input aria-describedby="form-status" id="f-name" name="name" type="text" autocomplete="name" required placeholder="Jane Doe" data-i18n-attr="placeholder:f.nameP">
             </div>
             <div class="field">
               <label for="f-email" data-i18n="f.email">Email</label>
-              <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="jane@bank.com" data-i18n-attr="placeholder:f.emailP">
+              <input aria-describedby="form-status" id="f-email" name="email" type="email" autocomplete="email" required placeholder="jane@bank.com" data-i18n-attr="placeholder:f.emailP">
             </div>
           </div>
           <div class="field">
             <label for="f-msg" data-i18n="f.msg">Message</label>
-            <textarea id="f-msg" name="message" required placeholder="Tell me about your team, the role or the opportunity…" data-i18n-attr="placeholder:f.msgP"></textarea>
+            <textarea aria-describedby="form-status" id="f-msg" name="message" required placeholder="Tell me about your team, the role or the opportunity…" data-i18n-attr="placeholder:f.msgP"></textarea>
           </div>
           <div class="form-foot">
             <small data-i18n="f.note">Opens your email client with the message ready to send.</small>
@@ -1112,7 +1113,7 @@
       'meta.title': 'Ziad Ouariachi — Senior Equity Research Analyst, Casablanca',
       'meta.desc': 'Ziad Ouariachi — Senior Equity Research Analyst based in Casablanca, Morocco. Equity research, valuation, financial modelling and M&A experience at Bernstein (Société Générale Group) and Valoris Securities.',
       'skip': 'Skip to content',
-      'a11y.nav': 'Primary', 'a11y.lang': 'Language', 'a11y.menu': 'Open menu', 'a11y.menuClose': 'Close menu',
+      'a11y.home': 'Ziad Ouariachi — home', 'a11y.nav': 'Primary', 'a11y.lang': 'Language', 'a11y.menu': 'Open menu', 'a11y.menuClose': 'Close menu',
       'a11y.toDark': 'Switch to dark mode', 'a11y.toLight': 'Switch to light mode', 'a11y.focus': 'Focus areas',
       'nav.about': 'About', 'nav.experience': 'Experience', 'nav.skills': 'Expertise', 'nav.education': 'Education', 'nav.highlights': 'Highlights', 'nav.contact': 'Contact',
 
@@ -1133,7 +1134,7 @@
       'about.p2': 'I build financial models, run valuations (DCF, trading and transaction multiples) and distil complex businesses into clear, actionable investment theses for institutional investors — backed by regular access to management teams.',
       'about.p3': 'I bring banks and financial institutions a complete, client-ready toolkit — investment analysis, due diligence, valuation and research writing — with in-depth knowledge of Moroccan and European markets and a strong interest in growth across Africa and the MENA region.',
       'about.strengths': 'Key strengths',
-      'str.1': 'Analytical rigour', 'str.2': 'Financial modeling & valuation', 'str.3': 'Research writing & reporting', 'str.4': 'Institutional client communication', 'str.5': 'Presentation', 'str.6': 'Organisation', 'str.7': 'Interpersonal skills',
+      'str.1': 'Analytical rigour', 'str.2': 'Financial modelling & valuation', 'str.3': 'Research writing & reporting', 'str.4': 'Institutional client communication', 'str.5': 'Presentation', 'str.6': 'Organisation', 'str.7': 'Interpersonal skills',
       'glance.title': 'At a glance', 'glance.base': 'Based in', 'glance.focus': 'Focus',
       'glance.focusV': 'Equity research, valuation & M&A — Morocco, Europe, MENA',
       'glance.bg': 'Background', 'glance.bgV': 'Sell-side equity research · M&A advisory',
@@ -1144,10 +1145,10 @@
       'exp.title': 'A track record built on research and transactions.',
       'exp.sub': 'From institutional-grade investment cases to live deal execution — most recent first.',
       'e1.role': 'Senior Equity Research Analyst', 'e1.dates': 'Feb 2025 — Present',
-      'e1.b1': 'Covered and analysed companies listed on the MASI index of the Casablanca Stock Exchange.',
-      'e1.b2': 'Built and maintained financial models and in-depth valuations to drive investment recommendations.',
-      'e1.b3': 'Published valuation notes, annual and quarterly results notes, sector and macroeconomic research on the Moroccan market.',
-      'e1.b4': 'Presented research to institutional investors and brokers, and handled bespoke client requests.',
+      'e1.b1': 'Cover and analyse companies listed on the MASI index of the Casablanca Stock Exchange.',
+      'e1.b2': 'Build and maintain financial models and in-depth valuations to drive investment recommendations.',
+      'e1.b3': 'Publish valuation notes, annual and quarterly results notes, sector and macroeconomic research on the Moroccan market.',
+      'e1.b4': 'Present research to institutional investors and brokers, and handle bespoke client requests.',
       'e1.t1': 'Moroccan equities', 'e1.t2': 'Valuation', 'e1.t3': 'Macro research',
       'e2.role': 'Equity Research Associate — Mid & Small Caps', 'e2.company': 'Bernstein · Société Générale Group', 'e2.dates': 'Jan 2022 — Feb 2025 · 3 yrs',
       'e2.b1': 'Covered European mid & small caps across consumer, healthcare, business services, leisure and real estate — including Teleperformance, Orpea, Fnac, Bénéteau, SEB, Nexity, Trigano and BIC.',
@@ -1169,7 +1170,7 @@
       'sk.ia': 'Investment Analysis', 'sk.ia1': 'Investment theses', 'sk.ia2': 'Valuation (DCF, multiples)', 'sk.ia3': 'Equity research', 'sk.ia4': 'Recommendations',
       'sk.dd': 'Due Diligence', 'sk.dd1': 'Financial statement analysis', 'sk.dd2': 'Management interviews', 'sk.dd3': 'Forecast review', 'sk.dd4': 'Information memorandums',
       'sk.mr': 'Market Research', 'sk.mr1': 'Sector studies', 'sk.mr2': 'Macroeconomic analysis', 'sk.mr3': 'Competitive landscape', 'sk.mr4': 'ESG analysis',
-      'sk.fm': 'Financial Modeling', 'sk.fm1': 'Three-statement models', 'sk.fm3': 'Trading comparables', 'sk.fm4': 'Transaction multiples',
+      'sk.fm': 'Financial Modelling', 'sk.fm1': 'Three-statement models', 'sk.fm3': 'Trading comparables', 'sk.fm4': 'Transaction multiples',
       'sk.sf': 'Sector Coverage', 'sk.sf1': 'Moroccan listed equities', 'sk.sf2': 'European mid & small caps', 'sk.sf3': 'Healthcare', 'sk.sf4': 'Leisure & real estate', 'sk.sf5': 'Consumer & retail', 'sk.sf6': 'Business services',
       'sk.tl': 'Tools', 'sk.tl1': 'Advanced Excel',
       'sk.lg': 'Languages', 'lg.en': 'English', 'lg.enL': 'Fluent · TOEIC 770', 'lg.fr': 'French', 'lg.frL': 'Fluent', 'lg.ar': 'Arabic', 'lg.arL': 'Fluent',
@@ -1180,26 +1181,26 @@
       'cert.1': 'TOEIC — 770 / 990', 'cert.1d': 'Certified professional English proficiency.',
       'int.t': 'Beyond the office', 'int.d': 'Tennis, boxing, international travel and social-impact volunteering.',
 
-      'hl.title': 'Selected deals & mandates',
+      'hl.title': 'Selected deals & research',
       'hl.sub': 'A snapshot of transactions and coverage work. Client names are withheld where confidential.',
-      'lbl.sector': 'Sector', 'lbl.stage': 'Stage', 'lbl.role': 'Role', 'lbl.outcome': 'Outcome',
+      'lbl.sector': 'Sector', 'lbl.stage': 'Scope', 'lbl.role': 'Role', 'lbl.outcome': 'Outcome',
       'd1.tag': 'M&A · Sell-side', 'd1.title': 'Company disposals — Moroccan mid-market', 'd1.sector': 'Multi-sector, Morocco', 'd1.stage': 'Private companies · control sale', 'd1.role': 'Buyer sourcing, teasers, valuation, IM drafting', 'd1.outcome': '4 transactions executed as part of the deal team',
-      'd2.tag': 'Equity research · Europe', 'd2.title': 'Initiations of coverage — European mid & small caps', 'd2.sector': 'Consumer, healthcare, business services, real estate', 'd2.stage': 'Listed · mid & small caps', 'd2.role': 'Modeling, valuation, management meetings, report writing', 'd2.outcome': "Investment recommendations distributed to Bernstein's institutional clients",
+      'd2.tag': 'Equity research · Europe', 'd2.title': 'Initiations of coverage — European mid & small caps', 'd2.sector': 'Consumer, healthcare, business services, leisure, real estate', 'd2.stage': 'Listed · mid & small caps', 'd2.role': 'Modelling, valuation, management meetings, report writing', 'd2.outcome': "Investment recommendations distributed to Bernstein's institutional clients",
       'd3.tag': 'Equity research · Morocco', 'd3.title': 'MASI coverage — Casablanca Stock Exchange', 'd3.sector': 'Moroccan listed companies', 'd3.stage': 'Listed · large & mid caps', 'd3.role': 'Senior analyst — models, valuation & results notes', 'd3.outcome': 'Valuation, results and macro research for institutional investors',
       'd4.tag': 'Thematic research', 'd4.title': 'Sector & ESG reports', 'd4.sector': 'European mid caps', 'd4.stage': 'Cross-sector thematic', 'd4.role': 'Research, analysis & drafting', 'd4.outcome': 'Sector and ESG insight used in investor engagement',
 
       'ct.title': "Let's talk.", 'ct.sub': "Banks, asset managers, investment firms and recruiters — I'd be glad to discuss how I can contribute to your team.",
-      'ct.phone': 'Phone', 'ct.loc': 'Location',
+      'ct.email': 'Email', 'ct.phone': 'Phone', 'ct.loc': 'Location',
       'f.name': 'Name', 'f.nameP': 'Jane Doe', 'f.email': 'Email', 'f.emailP': 'jane@bank.com', 'f.msg': 'Message', 'f.msgP': 'Tell me about your team, the role or the opportunity…',
       'f.note': 'Opens your email client with the message ready to send.', 'f.send': 'Send message',
-      'f.subject': 'Hello Ziad — message from your website', 'f.from': 'From', 'f.invalid': 'Please fill in your name, a valid email and a message.', 'f.ok': 'Opening your email client…',
+      'f.subject': 'Hello Ziad — message from your website', 'f.invalid': 'Please fill in your name, a valid email and a message.', 'f.ok': 'Opening your email client…',
       'ft.rights': 'All rights reserved.', 'ft.based': 'Based in Casablanca', 'ft.top': 'Back to top ↑'
     },
     fr: {
       'meta.title': 'Ziad Ouariachi — Analyste Senior Recherche Actions, Casablanca',
       'meta.desc': "Ziad Ouariachi — Analyste Senior Recherche Actions basé à Casablanca, Maroc. Recherche actions, valorisation, modélisation financière et M&A chez Bernstein (Groupe Société Générale) et Valoris Securities.",
       'skip': 'Aller au contenu',
-      'a11y.nav': 'Navigation principale', 'a11y.lang': 'Langue', 'a11y.menu': 'Ouvrir le menu', 'a11y.menuClose': 'Fermer le menu',
+      'a11y.home': 'Ziad Ouariachi — accueil', 'a11y.nav': 'Navigation principale', 'a11y.lang': 'Langue', 'a11y.menu': 'Ouvrir le menu', 'a11y.menuClose': 'Fermer le menu',
       'a11y.toDark': 'Passer en mode sombre', 'a11y.toLight': 'Passer en mode clair', 'a11y.focus': "Domaines d'expertise",
       'nav.about': 'À propos', 'nav.experience': 'Expérience', 'nav.skills': 'Expertise', 'nav.education': 'Formation', 'nav.highlights': 'Réalisations', 'nav.contact': 'Contact',
 
@@ -1221,10 +1222,10 @@
       'about.p3': "J'apporte aux banques et aux institutions financières une boîte à outils complète et opérationnelle — analyse d'investissement, due diligence, valorisation et rédaction de recherche — avec une connaissance approfondie des marchés marocain et européens et un fort intérêt pour la croissance en Afrique et dans la région MENA.",
       'about.strengths': 'Points forts',
       'str.1': 'Rigueur analytique', 'str.2': 'Modélisation financière & valorisation', 'str.3': 'Rédaction de recherche & reporting', 'str.4': 'Communication avec les clients institutionnels', 'str.5': 'Prise de parole', 'str.6': 'Organisation', 'str.7': 'Aisance relationnelle',
-      'glance.title': 'En bref', 'glance.base': 'Basé à', 'glance.focus': 'Focus',
+      'glance.title': 'En bref', 'glance.base': 'Basé à', 'glance.focus': 'Spécialisation',
       'glance.focusV': 'Recherche actions, valorisation & M&A — Maroc, Europe, MENA',
       'glance.bg': 'Parcours', 'glance.bgV': 'Recherche actions sell-side · Conseil M&A',
-      'glance.edu': 'Formation', 'glance.eduV': 'MSc International Finance, Rennes School of Business',
+      'glance.edu': 'Formation', 'glance.eduV': 'MSc en Finance Internationale, Rennes School of Business',
       'glance.langs': 'Langues', 'glance.langsV': 'Anglais · Français · Arabe',
       'glance.intl': 'International', 'cty.ma': 'Maroc', 'cty.fr': 'France',
 
@@ -1240,7 +1241,7 @@
       'e2.b1': 'Couverture de mid & small caps européennes (consommation, santé, services aux entreprises, loisirs, immobilier) — dont Teleperformance, Orpea, Fnac, Bénéteau, SEB, Nexity, Trigano et BIC.',
       'e2.b2': "Construction et mise à jour de modèles financiers détaillés et de valorisations pour étayer les recommandations d'investissement.",
       'e2.b3': 'Rencontres avec les équipes dirigeantes pour revoir les prévisions financières et échanger sur la stratégie.',
-      'e2.b4': 'Rédaction d’initiations de couverture, de publications de résultats trimestriels, de rapports sectoriels et ESG.',
+      'e2.b4': "Rédaction d'initiations de couverture, de previews et de publications de résultats trimestriels, de rapports sectoriels et ESG.",
       'e2.b5': 'Présentation de la recherche aux clients institutionnels, aux analystes sectoriels et à la force de vente Bernstein.',
       'e2.t1': 'Actions européennes', 'e2.t2': 'Initiations de couverture', 'e2.t4': 'Accès au management',
       'e3.role': 'Analyste M&A Sell-Side — Stage', 'e3.dates': 'Nov. 2020 — Mai 2021 · 6 mois',
@@ -1265,21 +1266,21 @@
       'edu.1': 'MSc en Finance Internationale', 'edu.1a': "Finance d'entreprise avancée", 'edu.1b': 'Analyse financière avancée', 'edu.1c': 'Financements court & long terme',
       'edu.2': 'International Bachelor en Management — Finance', 'edu.2a': "Finance d'entreprise", 'edu.2b': 'Valorisation & modélisation financière', 'edu.2c': 'Gestion de portefeuille', 'edu.2d': 'Marchés financiers', 'edu.2e': 'Stratégie',
       'cert.1': 'TOEIC — 770 / 990', 'cert.1d': "Niveau d'anglais professionnel certifié.",
-      'int.t': 'En dehors du bureau', 'int.d': 'Tennis, boxe, voyages internationaux et bénévolat à impact social.',
+      'int.t': "Centres d'intérêt", 'int.d': 'Tennis, boxe, voyages internationaux et bénévolat à impact social.',
 
-      'hl.title': 'Deals & mandats choisis',
+      'hl.title': 'Sélection de deals & recherche',
       'hl.sub': 'Un aperçu des transactions et des travaux de couverture. Les noms des clients sont omis lorsque confidentiels.',
-      'lbl.sector': 'Secteur', 'lbl.stage': 'Stade', 'lbl.role': 'Rôle', 'lbl.outcome': 'Résultat',
+      'lbl.sector': 'Secteur', 'lbl.stage': 'Périmètre', 'lbl.role': 'Rôle', 'lbl.outcome': 'Résultat',
       'd1.tag': 'M&A · Sell-side', 'd1.title': "Cessions d'entreprises — mid-market marocain", 'd1.sector': 'Multisectoriel, Maroc', 'd1.stage': 'Sociétés non cotées · cession de contrôle', 'd1.role': "Sourcing d'acquéreurs, teasers, valorisation, rédaction d'IM", 'd1.outcome': "4 opérations exécutées au sein de l'équipe deal",
-      'd2.tag': 'Recherche actions · Europe', 'd2.title': 'Initiations de couverture — mid & small caps européennes', 'd2.sector': 'Consommation, santé, services aux entreprises, immobilier', 'd2.stage': 'Coté · mid & small caps', 'd2.role': 'Modélisation, valorisation, rencontres management, rédaction', 'd2.outcome': "Recommandations d'investissement diffusées aux clients institutionnels de Bernstein",
-      'd3.tag': 'Recherche actions · Maroc', 'd3.title': 'Couverture MASI — Bourse de Casablanca', 'd3.sector': 'Sociétés cotées marocaines', 'd3.stage': 'Coté · large & mid caps', 'd3.role': 'Analyste senior — modèles, notes de valorisation & de résultats', 'd3.outcome': 'Recherche de valorisation, résultats et macro pour les investisseurs institutionnels',
+      'd2.tag': 'Recherche actions · Europe', 'd2.title': 'Initiations de couverture — mid & small caps européennes', 'd2.sector': 'Consommation, santé, services aux entreprises, loisirs, immobilier', 'd2.stage': 'Sociétés cotées · mid & small caps', 'd2.role': 'Modélisation, valorisation, rencontres management, rédaction', 'd2.outcome': "Recommandations d'investissement diffusées aux clients institutionnels de Bernstein",
+      'd3.tag': 'Recherche actions · Maroc', 'd3.title': 'Couverture MASI — Bourse de Casablanca', 'd3.sector': 'Sociétés cotées marocaines', 'd3.stage': 'Sociétés cotées · large & mid caps', 'd3.role': 'Analyste senior — modèles, notes de valorisation & de résultats', 'd3.outcome': 'Recherche de valorisation, résultats et macro pour les investisseurs institutionnels',
       'd4.tag': 'Recherche thématique', 'd4.title': 'Rapports sectoriels & ESG', 'd4.sector': 'Mid caps européennes', 'd4.stage': 'Thématique multisectorielle', 'd4.role': 'Recherche, analyse & rédaction', 'd4.outcome': "Éclairages sectoriels et ESG au service du dialogue avec les investisseurs",
 
-      'ct.title': 'Échangeons.', 'ct.sub': 'Banques, sociétés de gestion, sociétés d’investissement et recruteurs — je serai ravi d’échanger sur ma contribution à votre équipe.',
-      'ct.phone': 'Téléphone', 'ct.loc': 'Localisation',
-      'f.name': 'Nom', 'f.nameP': 'Prénom Nom', 'f.email': 'Email', 'f.emailP': 'vous@banque.com', 'f.msg': 'Message', 'f.msgP': 'Parlez-moi de votre équipe, du poste ou de l’opportunité…',
+      'ct.title': 'Échangeons.', 'ct.sub': "Banques, sociétés de gestion, sociétés d'investissement et recruteurs — je serai ravi d'échanger sur ma contribution à votre équipe.",
+      'ct.email': 'E-mail', 'ct.phone': 'Téléphone', 'ct.loc': 'Localisation',
+      'f.name': 'Nom', 'f.nameP': 'Prénom Nom', 'f.email': 'Email', 'f.emailP': 'vous@banque.com', 'f.msg': 'Message', 'f.msgP': "Parlez-moi de votre équipe, du poste ou de l'opportunité…",
       'f.note': 'Ouvre votre messagerie avec le message prêt à être envoyé.', 'f.send': 'Envoyer le message',
-      'f.subject': 'Bonjour Ziad — message depuis votre site', 'f.from': 'De', 'f.invalid': 'Merci de renseigner votre nom, un email valide et un message.', 'f.ok': 'Ouverture de votre messagerie…',
+      'f.subject': 'Bonjour Ziad — message depuis votre site', 'f.invalid': 'Merci de renseigner votre nom, un email valide et un message.', 'f.ok': 'Ouverture de votre messagerie…',
       'ft.rights': 'Tous droits réservés.', 'ft.based': 'Basé à Casablanca', 'ft.top': 'Retour en haut ↑'
     }
   };
@@ -1406,7 +1407,7 @@
     var valid = name && msg && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     [form.name, form.email, form.message].forEach(function (f) { f.setAttribute('aria-invalid', String(!f.value.trim())); });
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) form.email.setAttribute('aria-invalid', 'true');
-    if (!valid) { status.textContent = t('f.invalid'); status.classList.remove('visually-hidden'); status.style.cssText = 'margin:0;font-size:13px;color:#c0392b'; return; }
+    if (!valid) { status.textContent = t('f.invalid'); status.classList.remove('visually-hidden'); status.style.cssText = 'margin:0;font-size:13px;color:var(--danger)'; var bad = form.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
     status.textContent = t('f.ok'); status.style.cssText = 'margin:0;font-size:13px;color:var(--muted)';
     var body = msg + '\n\n— ' + name + ' (' + email + ')';
     window.location.href = 'mailto:ziad.ouariachi@rennes-sb.com?subject=' + encodeURIComponent(t('f.subject')) + '&body=' + encodeURIComponent(body);

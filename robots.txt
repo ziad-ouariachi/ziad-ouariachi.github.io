@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://matsmiersen.github.io/ZiadCV/sitemap.xml

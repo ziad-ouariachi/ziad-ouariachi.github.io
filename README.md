@@ -25,7 +25,7 @@ tools/
   build_pdfs.py             index.html → the two CV PDFs
   build_brand.py            favicons + og-image.jpg
   brand/og-image.html       template for the social card
-site.webmanifest, robots.txt, sitemap.xml, .nojekyll
+site.webmanifest, sitemap.xml, .nojekyll
 ```
 
 ## Editing content
@@ -56,4 +56,4 @@ then open http://localhost:5173/.
 ## Deploying
 GitHub Pages serves the `main` branch root. Push to `main` and the site updates in about a minute.
 If the site moves to another URL, update the absolute URLs in `index.html` (`canonical`, `og:*`, `twitter:*`,
-JSON-LD), `robots.txt` and `sitemap.xml`.
+JSON-LD) and `sitemap.xml`.
