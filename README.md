@@ -24,6 +24,7 @@ assets/
 tools/
   build_pdfs.py             index.html → the two CV PDFs
   build_brand.py            favicons + og-image.jpg
+  build_dist.py             upload-ready copy for any host, final URL baked in
   brand/og-image.html       template for the social card
 site.webmanifest, sitemap.xml, .nojekyll
 ```
@@ -53,7 +54,14 @@ python -m http.server 5173
 ```
 then open http://localhost:5173/.
 
-## Deploying
+## Deploying to any host
+```bash
+python tools/build_dist.py https://your-final-url/
+```
+This writes `dist/` and `dist.zip`, a clean copy of only the public files with the final URL baked into
+the canonical, social preview and sitemap tags. Upload `dist.zip` to Netlify Drop or Cloudflare Pages, or serve `dist/` anywhere.
+
+## Deploying (GitHub Pages)
 GitHub Pages serves the `main` branch root. Push to `main` and the site updates in about a minute.
 If the site moves to another URL, update the absolute URLs in `index.html` (`canonical`, `og:*`, `twitter:*`,
 JSON-LD) and `sitemap.xml`.

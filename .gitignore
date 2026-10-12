@@ -12,3 +12,7 @@ desktop.ini
 
 # LinkedIn assets (kept local, not published)
 SocialAssets/
+
+# Packaged build (tools/build_dist.py)
+dist/
+dist.zip
